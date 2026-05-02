@@ -93,3 +93,10 @@ text_box_LABEL.place(x=widget_x,y=widget_y+widgets_displace*4+20)
 main_text_box = Text(width=50, height=10, font=FONT)
 main_text_box.place(x=widget_x,y=widget_y+widgets_displace*5-40)
 
+
+#==============END
+#-------------adjust padding:
+# for widgets in window.winfo_children():
+#     widgets.grid_configure(padx=4,pady=4)
+
+window.mainloop()
