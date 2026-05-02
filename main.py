@@ -124,21 +124,43 @@ def save_file():
     }
     #_____________________________
     try:
-        with open("data.json", "a") as data_file:
+        #DEBUG
+        print("file reached")
+        #
+        with open(r"data/data.json", "a") as data_file:
             json.dump(new_data, data_file, indent=4)
     # -----------
     except FileNotFoundError:
-        with open("data.json", "w") as data_file:
-            json.dump(new_data, data_file)
+        #DEBUG
+        print("file created")
         #
+        with open(r"data/data.json", "w") as data_file:
+            json.dump(new_data, data_file)
 #-------------
 save_button = Button(text="SAVE💾", font=FONT, bg="blue", fg="white", command=save_file)
 save_button.place(x=widget_x+294,y=widget_y+widgets_displace*5+130)
 
 
+
+
+
 ###################### SEARCH/RECOVER-SYSTEM
+def recover_entry():
+    # _____________________________
+    try:
+        with open(r"data/data.json", "r") as data_file:
+            recovered_data = json.load(data_file)
+        #----
+        main_text_box.delete(0,END)
+        main_text_box.insert(END, recovered_data)
+    # -----------
+    except FileNotFoundError:
+        #DEBUG
+        print("NO FILE FOUND")
 
-
+#-------------
+save_button = Button(text="SEARCH🔍", font=FONT, bg="orange", fg="black", command=recover_entry)
+save_button.place(x=widget_x+284,y=widget_y+widgets_displace*5+160)
 
 #==============END
 window.mainloop()
