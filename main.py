@@ -124,18 +124,20 @@ def save_file():
     }
     #_____________________________
     try:
-        #DEBUG
-        print("file reached")
         #
-        with open(r"data/data.json", "a") as data_file:
-            json.dump(new_data, data_file, indent=4)
+        with open(r"data/data.json", "r") as data_file:  #even tho in "r"-read-mode we CAN UPDATE JSON. files:
+            updated_data = json.load(data_file)           #--> TAKING stored data
+            updated_data.update(new_data)  #--> updating said data
+            json.dump(updated_data, data_file, indent=4) #--> RE-INSERTING IT BACK to the file
+        # DEBUG
+        print("file reached")
     # -----------
     except FileNotFoundError:
         #DEBUG
         print("file created")
         #
         with open(r"data/data.json", "w") as data_file:
-            json.dump(new_data, data_file)
+            json.dump(new_data, data_file, indent=4)
 #-------------
 save_button = Button(text="SAVE💾", font=FONT, bg="blue", fg="white", command=save_file)
 save_button.place(x=widget_x+294,y=widget_y+widgets_displace*5+130)
