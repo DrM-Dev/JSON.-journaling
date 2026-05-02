@@ -107,7 +107,10 @@ def save_file():
     day = day_drop_menu.get()
     month = month_drop_menu.get()
     year = year_drop_menu.get()
-    entry_data = main_text_box.get()
+    entry_data = main_text_box.get("1.0", "end-1c")
+    #
+    #debug:
+    print(entry_data)
 
     #_____________________________
     new_data = {
@@ -122,9 +125,7 @@ def save_file():
     #_____________________________
     try:
         with open("data.json", "a") as data_file:
-            json.dump(new_data, data_file)
-        #
-
+            json.dump(new_data, data_file, indent=4)
     # -----------
     except FileNotFoundError:
         with open("data.json", "w") as data_file:
