@@ -124,11 +124,14 @@ def save_file():
     }
     #_____________________________
     try:
-        #
-        with open(r"data/data.json", "r") as data_file:  #even tho in "r"-read-mode we CAN UPDATE JSON. files:
+        with open(r"data/data.json", "r") as data_file:
             updated_data = json.load(data_file)           #--> TAKING stored data
             updated_data.update(new_data)  #--> updating said data
+            print("DATA GRABBED")
+            #####
+        with open(r"data/data.json", "w") as data_file:
             json.dump(updated_data, data_file, indent=4) #--> RE-INSERTING IT BACK to the file
+            print("UPDATED")
         # DEBUG
         print("file reached")
     # -----------
