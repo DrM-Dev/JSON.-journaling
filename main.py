@@ -86,3 +86,10 @@ year_drop_menu.set("2026")
 ####
 
 
+###################### TEXT BOX (the meat and potatoes)
+text_box_LABEL = Label(text="Write your memories here:", font=FONT, justify="left")
+text_box_LABEL.place(x=widget_x,y=widget_y+widgets_displace*4+20)
+#----
+main_text_box = Text(width=50, height=10, font=FONT)
+main_text_box.place(x=widget_x,y=widget_y+widgets_displace*5-40)
+
