@@ -10,6 +10,7 @@ j_entry_name = ""
 day = ""
 month = ""
 year = ""
+entry_data = ""
 
 #=============SETUP
 window = Tk()
@@ -94,9 +95,46 @@ main_text_box = Text(width=50, height=10, font=FONT)
 main_text_box.place(x=widget_x,y=widget_y+widgets_displace*5-40)
 
 
-#==============END
-#-------------adjust padding:
-# for widgets in window.winfo_children():
-#     widgets.grid_configure(padx=4,pady=4)
+###################### SAVE-SYSTEM
+def save_file():
+    global j_entry_name
+    global day
+    global month
+    global year
+    global entry_data
+    ############
+    j_entry_name = j_entry_bar.get()
+    day = day_drop_menu.get()
+    month = month_drop_menu.get()
+    year = year_drop_menu.get()
+    entry_data = main_text_box.get()
 
+    #_____________________________
+    new_data = {
+        "Entry_Name" : f"{j_entry_name}",
+        #
+        "Date_Day" : f"{day}",
+        "Month_Day": f"{month}",
+        "Year_Day": f"{year}",
+        #
+        "Entry_Data" : f"{entry_data}"
+    }
+    #_____________________________
+    try:
+        with open("data.json", "a") as data_file:
+            json.dump(new_data, data_file)
+        #
+
+    # -----------
+    except FileNotFoundError:
+        with open("data.json", "w") as data_file:
+            json.dump(new_data, data_file)
+        #
+
+#-------------
+save_button = Button(text="SAVE💾", font=FONT, bg="blue", fg="white", command=save_file)
+save_button.place(x=widget_x+290,y=widget_y+widgets_displace*5+125)
+
+
+#==============END
 window.mainloop()
