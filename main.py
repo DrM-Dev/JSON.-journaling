@@ -31,7 +31,7 @@ widget_y = window_dim_x/4
 widgets_displace = 40
 
 ###################### ENTRY NAME SECTION
-j_entry_name_LABEL = Label(text="Enter the name of your journal entry here\n⚠️-remember it! it will be used to recall your journal", justify="left", font=FONT)
+j_entry_name_LABEL = Label(text=">Enter the name of your journal entry here\n>You can search for the entry you saved using its name", justify="left", font=FONT)
 j_entry_name_LABEL.place(x=widget_x,y=widget_y)
 #
 j_entry_bar = Entry(width=50, font=FONT)
@@ -131,10 +131,13 @@ def save_file():
         with open("data.json", "w") as data_file:
             json.dump(new_data, data_file)
         #
-
 #-------------
 save_button = Button(text="SAVE💾", font=FONT, bg="blue", fg="white", command=save_file)
-save_button.place(x=widget_x+290,y=widget_y+widgets_displace*5+125)
+save_button.place(x=widget_x+294,y=widget_y+widgets_displace*5+130)
+
+
+###################### SEARCH/RECOVER-SYSTEM
+
 
 
 #==============END
