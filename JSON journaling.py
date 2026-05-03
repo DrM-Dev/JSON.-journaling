@@ -26,9 +26,19 @@ window.config(padx=10,pady=10)
 #_____________________________________________________
 #widgets placement
 widget_x = window_dim_x/4 - 40
-widget_y = window_dim_x/4
+widget_y = window_dim_x/4 + 40
 #
 widgets_displace = 40
+
+###################### LOGO-CANVAS:
+main_canvas = Canvas(width=400, height=180)
+main_canvas.place(x=window_dim_x/4-60,y=window_dim_y/4-150)
+
+#adding image:
+logo_file = PhotoImage(file="cover.png")
+#
+logo_widget = main_canvas.create_image(400/2,180/2,image = logo_file)
+
 
 ###################### ENTRY NAME SECTION
 j_entry_name_LABEL = Label(text=">Enter the name of your journal entry here\n>You can search for the entry you saved using its name", justify="left", font=FONT)
