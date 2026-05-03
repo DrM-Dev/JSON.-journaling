@@ -35,7 +35,7 @@ main_canvas = Canvas(width=400, height=180)
 main_canvas.place(x=window_dim_x/4-60,y=window_dim_y/4-150)
 
 #adding image:
-logo_file = PhotoImage(file="cover.png")
+logo_file = PhotoImage(file=r"images/cover.png")
 #
 logo_widget = main_canvas.create_image(400/2,180/2,image = logo_file)
 
@@ -155,9 +155,8 @@ def save_file():
 #-------------
 save_button = Button(text="SAVE💾", font=FONT, bg="blue", fg="white", command=save_file)
 save_button.place(x=widget_x+294,y=widget_y+widgets_displace*5+130)
-
-
-
+####
+window.bind('<Return>', lambda event: save_button.invoke()) #activate with Return-key "Enter"
 
 
 ###################### SEARCH/RECOVER-SYSTEM
@@ -185,8 +184,8 @@ def recover_entry():
     # -----------
 
 #-------------
-save_button = Button(text="SEARCH🔍", font=FONT, bg="orange", fg="black", command=recover_entry)
-save_button.place(x=widget_x+284,y=widget_y+widgets_displace*5+160)
+search_button = Button(text="SEARCH🔍", font=FONT, bg="orange", fg="black", command=recover_entry)
+search_button.place(x=widget_x+284,y=widget_y+widgets_displace*5+160)
 
 #==============END
 window.mainloop()
