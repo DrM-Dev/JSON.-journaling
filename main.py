@@ -114,13 +114,14 @@ def save_file():
 
     #_____________________________
     new_data = {
-        "Entry_Name" : f"{j_entry_name}",
-        #
-        "Date_Day" : f"{day}",
-        "Month_Day": f"{month}",
-        "Year_Day": f"{year}",
-        #
-        "Entry_Data" : f"{entry_data}"
+        f"{j_entry_name}":{
+            #
+            "Day" : f"{day}",
+            "Month": f"{month}",
+            "Year": f"{year}",
+            #
+            "ENTRY:" : "\n"f"{entry_data}"
+        }
     }
     #_____________________________
     try:
@@ -151,17 +152,27 @@ save_button.place(x=widget_x+294,y=widget_y+widgets_displace*5+130)
 
 ###################### SEARCH/RECOVER-SYSTEM
 def recover_entry():
+    requested_entry = j_entry_bar.get()
     # _____________________________
     try:
         with open(r"data/data.json", "r") as data_file:
             recovered_data = json.load(data_file)
         #----
-        main_text_box.delete(0,END)
-        main_text_box.insert(END, recovered_data)
+        main_text_box.delete("1.0",END)
+        main_text_box.insert(END, recovered_data[requested_entry])
     # -----------
     except FileNotFoundError:
-        #DEBUG
-        print("NO FILE FOUND")
+        main_text_box.delete("1.0", END)
+        main_text_box.insert(END, f"⚠️⚠️ERROR!⚠️⚠️\nthe requested entry {requested_entry}\nwas NOT FOUND"
+                                  f"\n\nyou can write a new entry by the same name"
+                                  f"\n write here then click [SAVE]\n :)")
+    # -----------
+    except KeyError:
+        main_text_box.delete("1.0", END)
+        main_text_box.insert(END, f"⚠️⚠️ERROR!⚠️⚠️\nthe requested entry {requested_entry}\nwas NOT FOUND"
+                                  f"\n\nyou can write a new entry by the same name"
+                                  f"\n write here then click [SAVE]\n :)")
+    # -----------
 
 #-------------
 save_button = Button(text="SEARCH🔍", font=FONT, bg="orange", fg="black", command=recover_entry)
