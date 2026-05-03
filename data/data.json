@@ -1,8 +1,8 @@
 {
-    "ONE": {
-        "Day": "1",
-        "Month": "1",
-        "Year": "2026",
-        "ENTRY": "\n2123\naefff\nasm21in1e\nnifnsai\n1c2uen\nefun\n\n"
+    "Example Entry Name": {
+        "Day": "",
+        "Month": "",
+        "Year": "",
+        "ENTRY": "\nEntry Data"
     }
 }

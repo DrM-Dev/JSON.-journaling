@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 import json
+from tkinter import messagebox
+from pathlib import Path
 
 #=============
 #Globals
@@ -106,12 +108,25 @@ main_text_box.place(x=widget_x,y=widget_y+widgets_displace*5-40)
 
 
 ###################### SAVE-SYSTEM
+#_____________________________
+new_data = {
+    f"Example Entry Name":{
+        #
+        "Day" : f"{day_drop_menu.get()}",
+        "Month": f"{month_drop_menu.get()}",
+        "Year": f"{year_drop_menu.get()}",
+        #
+        "ENTRY" : "\n"f"Entry Data"
+    }
+}
+#---------------------------------
 def save_file():
     global j_entry_name
     global day
     global month
     global year
     global entry_data
+    global new_data
     ############
     j_entry_name = j_entry_bar.get()
     day = day_drop_menu.get()
@@ -121,16 +136,15 @@ def save_file():
     #
     #debug:
     print(entry_data)
-
     #_____________________________
     new_data = {
-        f"{j_entry_name}":{
+        f"{j_entry_name}": {
             #
-            "Day" : f"{day}",
+            "Day": f"{day}",
             "Month": f"{month}",
             "Year": f"{year}",
             #
-            "ENTRY" : "\n"f"{entry_data}"
+            "ENTRY": "\n"f"{entry_data}"
         }
     }
     #_____________________________
@@ -147,14 +161,25 @@ def save_file():
         print("file reached")
     # -----------
     except FileNotFoundError:
-        #DEBUG
+        messagebox.showerror(title="DATA FOLDER MOVED!",
+                             message="data folder have been moved/deleted\n follow the instructions in the text box :)")
+        ####
+        Path("data").mkdir(exist_ok=True)
+        ####
+        main_text_box.delete("1.0", END)
+        main_text_box.insert(END, f"⚠️ERROR!⚠️\nNO DATA STORAGE FOUND!!!\n the [data] folder might be deleted/replaced"
+                                  f"\n\nwe made you a new one! check it near the app"
+                                  f"\nthe program will rebuild a new database as well :)")
+        #+++++++++++++++++++++++++++DEBUG2
         print("file created")
         #
         with open(r"data/data.json", "w") as data_file:
             json.dump(new_data, data_file, indent=4)
-#-------------
-save_button = Button(text="SAVE💾", font=FONT, bg="blue", fg="white", command=save_file)
-save_button.place(x=widget_x+294,y=widget_y+widgets_displace*5+130)
+
+
+#-------------SAVE BUTTON
+save_button = Button(text="SAVE💾", font=FONT, bg="blue", fg="white", command=save_file, width=30)
+save_button.place(x=widget_x,y=widget_y+widgets_displace*5+130)
 ####
 window.bind('<Return>', lambda event: save_button.invoke()) #activate with Return-key "Enter"
 
@@ -164,39 +189,112 @@ def recover_entry():
     requested_entry_name = j_entry_bar.get()
     # _____________________________
     try:
-        with open(r"data/data.json", "r") as data_file:
-            recovered_data = json.load(data_file)
-        #----
-        main_text_box.delete("1.0",END)
-        #----
-        output = recovered_data[requested_entry_name]
-        print(f"DEBUG DETAILS: \noutput:{output}\n{type(output)}")
-        #----
-        final_output = (f"Entry name: {requested_entry_name}"
-                        f"\nDate: {output['Day']}/{output['Month']}/{output['Year']}"
-                        f"\n\nEntry Content:\n{output["ENTRY"]}")
-        print(f"\n\n\nTHIS: {final_output}")
-        ####
-        main_text_box.insert(END, final_output)
-        ####
+        if requested_entry_name == "":
+            messagebox.showwarning(title="Empty Search", message="Please check the instructions\nprovided in the text box :)")
+            ####
+            main_text_box.delete("1.0", END)
+            main_text_box.insert(END, f"⚠️ERROR!⚠️\nYou didn't enter an entry name!!"
+                                      f"\n\nclick [OPEN DAIRY] to check the entries you saved!"
+                                      f"\nor make a new entry name and press [SAVE]"
+                                      f"\nthen look for it by name using [OPEN]")
+        else:
+            with open(r"data/data.json", "r") as data_file:
+                recovered_data = json.load(data_file)
+            #----
+            main_text_box.delete("1.0",END)
+            #----
+            output = recovered_data[requested_entry_name]
+            print(f"DEBUG DETAILS: \noutput:{output}\n{type(output)}")
+            #----
+            final_output = (f"Entry name: {requested_entry_name}"
+                            f"\nDate: {output['Day']}/{output['Month']}/{output['Year']}"
+                            f"\n\nEntry Content:\n{output["ENTRY"]}")
+            print(f"\n\n\nTHIS: {final_output}")
+            ####
+            main_text_box.insert(END, final_output)
+            ####
 
     # -----------
     except FileNotFoundError:
+        messagebox.showerror(title="DATA FOLDER MOVED!",
+                             message="data folder have been moved/deleted\n follow the instructions in the text box :)")
+        ####
+        Path("data").mkdir(exist_ok=True)
+        ####
         main_text_box.delete("1.0", END)
-        main_text_box.insert(END, f"⚠️⚠️ERROR!⚠️⚠️\nthe requested entry {requested_entry_name}\nwas NOT FOUND"
-                                  f"\n\nyou can write a new entry by the same name"
-                                  f"\n write here then click [SAVE]\n :)")
+        main_text_box.insert(END, f"⚠️ERROR!⚠️\nNO DATA STORAGE FOUND!!!\n the [data] folder might be deleted/replaced"
+                                  f"\n\nwe made you a new one! check it near the app"
+                                  f"\nthe program will rebuild a new database as well :)")
+        #+++++++++++++++++++++++++++DEBUG2
+        print("file created")
+        #
+        with open(r"data/data.json", "w") as data_file:
+            json.dump(new_data, data_file, indent=4)
     # -----------
     except KeyError:
+        messagebox.showwarning(title="No file", message="No Entry with such name was found\n follow instructions provided in the text box! :)")
+        ####
         main_text_box.delete("1.0", END)
-        main_text_box.insert(END, f"⚠️⚠️ERROR!⚠️⚠️\nthe requested entry {requested_entry_name}\nwas NOT FOUND"
+        main_text_box.insert(END, f"⚠️️ERROR!⚠️\nthe requested entry {requested_entry_name}\nwas NOT FOUND"
                                   f"\n\nyou can write a new entry by the same name"
                                   f"\n write here then click [SAVE]\n :)")
     # -----------
 
-#-------------
-search_button = Button(text="SEARCH🔍", font=FONT, bg="orange", fg="black", command=recover_entry)
-search_button.place(x=widget_x+284,y=widget_y+widgets_displace*5+160)
+#-------------SEARCH-BUTTON
+search_button = Button(text="OPEN📖", font=FONT, bg="orange", fg="black", command=recover_entry, width=11)
+search_button.place(x=widget_x+255,y=widget_y+widgets_displace*5+130)
+
+
+
+
+
+###################### LIST ALL ENTRIES STORED:
+def show_storage():
+    # _____________________________
+    try:
+        with open(r"data/data.json", "r") as data_file:
+            recovered_data = json.load(data_file)
+            output = recovered_data
+
+        #----#formatting
+        formatted_output = ""
+        n=1
+        for data_log in output:
+            formatted_output += f"\n{n}-  {data_log}  |  Date {output[data_log]["Day"]}/{output[data_log]["Month"]}/{output[data_log]["Year"]}"
+            n+=1
+        ####
+        main_text_box.delete("1.0", END)
+        main_text_box.insert(END, f"Entry Names In Data:\n{formatted_output}")
+        ####
+        # Day
+        # Month
+        # Year
+        # ENTRY
+
+        # ----------------------
+    except FileNotFoundError:
+        messagebox.showerror(title="DATA FOLDER MOVED!",
+                               message="data folder have been moved/deleted\n follow the instructions in the text box :)")
+        ####
+        Path("data").mkdir(exist_ok=True)
+        ####
+        main_text_box.delete("1.0", END)
+        main_text_box.insert(END, f"⚠️ERROR!⚠️\nNO DATA STORAGE FOUND!!!\n the [data] folder might be deleted/replaced"
+                                  f"\n\nwe made you a new one! check it near the app"
+                                  f"\nthe program will rebuild a new database as well :)")
+        #+++++++++++++++++++++++++++DEBUG2
+        print("file created")
+        #
+        with open(r"data/data.json", "w") as data_file:
+            json.dump(new_data, data_file, indent=4)
+
+
+#-------------LIST STORED-DATA BUTTON
+show_storage_button = Button(text="Open Dairy🔍", font=FONT, bg="silver", fg="black", command=show_storage, width=43)
+show_storage_button.place(x=widget_x,y=widget_y+widgets_displace*5+160)
+
+
+
 
 #==============END
 window.mainloop()
