@@ -168,7 +168,10 @@ def recover_entry():
             recovered_data = json.load(data_file)
         #----
         main_text_box.delete("1.0",END)
+        #----
+        # output = f"Entry Name: {recovered_data[requested_entry]} :\nDate:\n{recovered_data["Day"]}/{recovered_data["Month"]}/{recovered_data["Year"]}\n\nEntry Record:\n{recovered_data["ENTRY"]}"
         main_text_box.insert(END, recovered_data[requested_entry])
+
     # -----------
     except FileNotFoundError:
         main_text_box.delete("1.0", END)
