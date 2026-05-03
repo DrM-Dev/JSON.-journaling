@@ -130,7 +130,7 @@ def save_file():
             "Month": f"{month}",
             "Year": f"{year}",
             #
-            "ENTRY:" : "\n"f"{entry_data}"
+            "ENTRY" : "\n"f"{entry_data}"
         }
     }
     #_____________________________
@@ -161,7 +161,7 @@ window.bind('<Return>', lambda event: save_button.invoke()) #activate with Retur
 
 ###################### SEARCH/RECOVER-SYSTEM
 def recover_entry():
-    requested_entry = j_entry_bar.get()
+    requested_entry_name = j_entry_bar.get()
     # _____________________________
     try:
         with open(r"data/data.json", "r") as data_file:
@@ -169,19 +169,27 @@ def recover_entry():
         #----
         main_text_box.delete("1.0",END)
         #----
-        # output = f"Entry Name: {recovered_data[requested_entry]} :\nDate:\n{recovered_data["Day"]}/{recovered_data["Month"]}/{recovered_data["Year"]}\n\nEntry Record:\n{recovered_data["ENTRY"]}"
-        main_text_box.insert(END, recovered_data[requested_entry])
+        output = recovered_data[requested_entry_name]
+        print(f"DEBUG DETAILS: \noutput:{output}\n{type(output)}")
+        #----
+        final_output = (f"Entry name: {requested_entry_name}"
+                        f"\nDate: {output['Day']}/{output['Month']}/{output['Year']}"
+                        f"\n\nEntry Content:\n{output["ENTRY"]}")
+        print(f"\n\n\nTHIS: {final_output}")
+        ####
+        main_text_box.insert(END, final_output)
+        ####
 
     # -----------
     except FileNotFoundError:
         main_text_box.delete("1.0", END)
-        main_text_box.insert(END, f"⚠️⚠️ERROR!⚠️⚠️\nthe requested entry {requested_entry}\nwas NOT FOUND"
+        main_text_box.insert(END, f"⚠️⚠️ERROR!⚠️⚠️\nthe requested entry {requested_entry_name}\nwas NOT FOUND"
                                   f"\n\nyou can write a new entry by the same name"
                                   f"\n write here then click [SAVE]\n :)")
     # -----------
     except KeyError:
         main_text_box.delete("1.0", END)
-        main_text_box.insert(END, f"⚠️⚠️ERROR!⚠️⚠️\nthe requested entry {requested_entry}\nwas NOT FOUND"
+        main_text_box.insert(END, f"⚠️⚠️ERROR!⚠️⚠️\nthe requested entry {requested_entry_name}\nwas NOT FOUND"
                                   f"\n\nyou can write a new entry by the same name"
                                   f"\n write here then click [SAVE]\n :)")
     # -----------
