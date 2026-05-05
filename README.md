@@ -1,7 +1,7 @@
 # JSON.-Journaling 0.1
-*Simple Local Dairy App*
+*Simple Local Diary App*
 
-this simple pun project I made to showcase how to make a simple dairy using JSON. data as a smiple storage
+this simple pun project I made to showcase how to make a simple diary using JSON. data as a smiple storage
 you can save, and recall entries/logs based on names, I included instructions and warnings if mistakes happens 
 :)
 _________________
