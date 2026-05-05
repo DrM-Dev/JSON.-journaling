@@ -395,7 +395,7 @@ def show_storage():
 
 
 #-------------LIST STORED-DATA BUTTON
-show_storage_button = Button(text="Open Dairy🔍", font=FONT, bg="silver", fg="black", command=show_storage, width=43)
+show_storage_button = Button(text="Open Dairy🔍", font=FONT, bg="light blue", fg="black", command=show_storage, width=43)
 show_storage_button.place(x=widget_x,y=widget_y+widgets_displace*5+160)
 
 

@@ -1,32 +1,8 @@
 {
     "Example Entry Name": {
-        "Day": "",
-        "Month": "",
-        "Year": "",
+        "Day": "1",
+        "Month": "1",
+        "Year": "2026",
         "ENTRY": "\nEntry Data"
-    },
-    "Entry test": {
-        "Day": "5",
-        "Month": "5",
-        "Year": "2026",
-        "ENTRY": "\nWrite something here\nthen you can recall it later\nby using the exact name of the entry\nwhich is\n\"Entry test\"\n(make sure to write it exactly how it's written)\n:)"
-    },
-    "testing 1": {
-        "Day": "1",
-        "Month": "1",
-        "Year": "2026",
-        "ENTRY": "\nthis is a test 1"
-    },
-    "adawdasdawda": {
-        "Day": "1",
-        "Month": "1",
-        "Year": "2026",
-        "ENTRY": "\nfawdasdasd"
-    },
-    "": {
-        "Day": "1",
-        "Month": "1",
-        "Year": "2026",
-        "ENTRY": "\ntest"
     }
 }
