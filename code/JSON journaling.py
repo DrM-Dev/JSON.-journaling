@@ -346,6 +346,14 @@ show_storage_button.place(x=widget_x,y=widget_y+widgets_displace*5+160)
 
 
 
+###################### Clear text-boxes
+def clear_boxes():
+    j_entry_bar.delete("1.0", END)
+    main_text_box.delete("1.0", END)
+
+clear_button = Button(text="CLEAR♻️", font=FONT, bg="RED", fg="white", command=clear_boxes, width=43)
+clear_button.place(x=widget_x,y=widget_y+widgets_displace*5+160)
+
 
 #==============END
 window.mainloop()
