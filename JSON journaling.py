@@ -59,6 +59,8 @@ day = ""
 month = ""
 year = ""
 entry_data = ""
+#
+file_save_state = False
 
 #=============SETUP
 window = Tk()
@@ -156,7 +158,30 @@ main_text_box.place(x=widget_x,y=widget_y+widgets_displace*5-40)
 
 
 ###################### SAVE-SYSTEM
-#_____________________________
+#_____________________________SAVE CHECKER
+###################### Checking Save-State:
+# file_save_state = False (default)
+lights_canvas = Canvas(width=20, height=20)
+lights_canvas.place(x=window_dim_x / 4 - 65, y=window_dim_y / 4 + 372)
+#
+file_save_state_img = PhotoImage(file="images/green_state.png")
+file_SS_green_light = lights_canvas.create_image(12, 12,
+                                                 image=file_save_state_img)
+#
+file_unsave_state_img = PhotoImage(file="images/red_state.png")
+file_SS_red_light = lights_canvas.create_image(12, 12,
+                                               image=file_unsave_state_img)  # <-----THIS ONE is the one manipulated
+                                                                                                            # to be off or on
+def file_save_check():
+    print("SAVE CHECK APPLIED")
+
+# x-xx-xx-xx-xx-xx-xx-xx-xx-xx-x #
+def file_save_uncheck():
+    print("FILE IS NOT SAVED")
+# invoke this function when any key is pressed or typed to the main box!!!!
+
+
+#_____________________________DATA TEMPLATE
 new_data = {
     f"Example Entry Name":{
         #
@@ -167,7 +192,10 @@ new_data = {
         "ENTRY" : "\n"f"Entry Data"
     }
 }
-#---------------------------------
+
+
+
+#--------------------------------- SAVE SYSTEM
 def save_file():
     global j_entry_name
     global day
@@ -223,14 +251,16 @@ def save_file():
         #
         with open(r"data/data.json", "w") as data_file:
             json.dump(new_data, data_file, indent=4)
+    #--------save check
+    finally:
+        file_save_check()
 
 
 #-------------SAVE BUTTON
 save_button = Button(text="SAVE💾", font=FONT, bg="blue", fg="white", command=save_file, width=30)
 save_button.place(x=widget_x,y=widget_y+widgets_displace*5+130)
 ####
-window.bind('<Return>', lambda event: save_button.invoke()) #activate with Return-key "Enter"
-
+# window.bind('<Return>', lambda event: save_button.invoke()) #activate with Return-key "Enter"
 
 ###################### SEARCH/RECOVER-SYSTEM
 def recover_entry():
@@ -244,7 +274,7 @@ def recover_entry():
             main_text_box.insert(END, f"ERROR!⚠️\nYou didn't enter an entry name!!"
                                       f"\n\nclick [OPEN DAIRY] to check the entries you saved!"
                                       f"\nor make a new entry name and press [SAVE]"
-                                      f"\nthen look for it by name using [OPEN]")
+                                      f"\nthen look for it by name using [READ]")
         else:
             with open(r"data/data.json", "r") as data_file:
                 recovered_data = json.load(data_file)
@@ -291,7 +321,7 @@ def recover_entry():
     # -----------
 
 #-------------SEARCH-BUTTON
-search_button = Button(text="OPEN📖", font=FONT, bg="orange", fg="black", command=recover_entry, width=11)
+search_button = Button(text="READ📖", font=FONT, bg="orange", fg="black", command=recover_entry, width=11)
 search_button.place(x=widget_x+255,y=widget_y+widgets_displace*5+130)
 
 
