@@ -208,7 +208,7 @@ window.bind('<KeyRelease>', lambda event: any_key_pressed.invoke())
 
 #_____________________________DATA TEMPLATE
 new_data = {
-    f"Example Entry Name":{
+    f"example entry name":{
         #
         "Day" : f"{day_drop_menu.get()}",
         "Month": f"{month_drop_menu.get()}",

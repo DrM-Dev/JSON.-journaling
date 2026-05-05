@@ -1,8 +1,8 @@
 {
-    "Example Entry Name": {
+    "example entry name": {
         "Day": "1",
         "Month": "1",
         "Year": "2026",
         "ENTRY": "\nEntry Data"
-    }
+    },
 }
