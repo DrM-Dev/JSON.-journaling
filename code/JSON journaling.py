@@ -296,7 +296,7 @@ def recover_entry():
             ####
             main_text_box.delete("1.0", END)
             main_text_box.insert(END, f"ERROR!⚠️\nYou didn't enter an entry name!!"
-                                      f"\n\nclick [OPEN DAIRY] to check the entries you saved!"
+                                      f"\n\nclick [OPEN DIARY] to check the entries you saved!"
                                       f"\nor make a new entry name and press [SAVE]"
                                       f"\nthen look for it by name using [READ]")
         else:
@@ -395,7 +395,7 @@ def show_storage():
 
 
 #-------------LIST STORED-DATA BUTTON
-show_storage_button = Button(text="Open Dairy🔍", font=FONT, bg="light blue", fg="black", command=show_storage, width=43)
+show_storage_button = Button(text="OPEN DIARY🔍", font=FONT, bg="light blue", fg="black", command=show_storage, width=43)
 show_storage_button.place(x=widget_x,y=widget_y+widgets_displace*5+160)
 
 
