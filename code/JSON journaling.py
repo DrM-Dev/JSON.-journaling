@@ -90,7 +90,8 @@ logo_widget = main_canvas.create_image(400/2,180/2,image = logo_file)
 
 
 ###################### ENTRY NAME SECTION
-j_entry_name_LABEL = Label(text=">Enter the name of your journal entry here\n>You can search for the entry you saved using its name", justify="left", font=FONT)
+j_entry_name_LABEL = Label(text=">Enter the name of your journal entry here"
+                                "\n>You can search for the entry you saved using its name", justify="left", font=FONT)
 j_entry_name_LABEL.place(x=widget_x,y=widget_y)
 #
 j_entry_bar = Entry(width=50, font=FONT)
@@ -279,7 +280,8 @@ def recover_entry():
             json.dump(new_data, data_file, indent=4)
     # -----------
     except KeyError:
-        messagebox.showwarning(title="No file", message="No Entry with such name was found \n follow instructions provided in the text box! :)")
+        messagebox.showwarning(title="No file", message="No Entry with such name was found"
+                                                        "\nfollow instructions provided in the text box! :)")
         ####
         main_text_box.delete("1.0", END)
         main_text_box.insert(END, f"️ERROR!⚠️\nthe requested entry {requested_entry_name}\nwas NOT FOUND"
@@ -322,12 +324,13 @@ def show_storage():
         # ----------------------
     except FileNotFoundError:
         messagebox.showerror(title="DATA FOLDER MOVED!",
-                               message="data folder have been moved/deleted\n follow the instructions in the text box :)")
+                               message="data folder have been moved/deleted\n"
+                                       "follow the instructions in the text box :)")
         ####
         Path("data").mkdir(exist_ok=True)
         ####
         main_text_box.delete("1.0", END)
-        main_text_box.insert(END, f"ERROR!⚠️\nNO DATA STORAGE FOUND!!!\n the [data] folder might be deleted/replaced"
+        main_text_box.insert(END, f"ERROR!⚠️\nNO DATA STORAGE FOUND!!!\nthe [data] folder might be deleted/replaced"
                                   f"\n\nwe made you a new one! check it near the app"
                                   f"\nthe program will rebuild a new database as well :)")
         #+++++++++++++++++++++++++++DEBUG2
