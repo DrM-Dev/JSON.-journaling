@@ -23,6 +23,7 @@ window_dim_y = 600
 #
 window.minsize(window_dim_x,window_dim_y)
 window.maxsize(window_dim_x,window_dim_y)
+window.iconbitmap("images/iconbitmap.ico")
 window.config(padx=10,pady=10)
 
 #_____________________________________________________
@@ -167,7 +168,7 @@ def save_file():
         Path("data").mkdir(exist_ok=True)
         ####
         main_text_box.delete("1.0", END)
-        main_text_box.insert(END, f"⚠️ERROR!⚠️\nNO DATA STORAGE FOUND!!!\n the [data] folder might be deleted/replaced"
+        main_text_box.insert(END, f"ERROR!⚠️\nNO DATA STORAGE FOUND!!!\n the [data] folder might be deleted/replaced"
                                   f"\n\nwe made you a new one! check it near the app"
                                   f"\nthe program will rebuild a new database as well :)")
         #+++++++++++++++++++++++++++DEBUG2
@@ -193,7 +194,7 @@ def recover_entry():
             messagebox.showwarning(title="Empty Search", message="Please check the instructions\nprovided in the text box :)")
             ####
             main_text_box.delete("1.0", END)
-            main_text_box.insert(END, f"⚠️ERROR!⚠️\nYou didn't enter an entry name!!"
+            main_text_box.insert(END, f"ERROR!⚠️\nYou didn't enter an entry name!!"
                                       f"\n\nclick [OPEN DAIRY] to check the entries you saved!"
                                       f"\nor make a new entry name and press [SAVE]"
                                       f"\nthen look for it by name using [OPEN]")
@@ -222,7 +223,7 @@ def recover_entry():
         Path("data").mkdir(exist_ok=True)
         ####
         main_text_box.delete("1.0", END)
-        main_text_box.insert(END, f"⚠️ERROR!⚠️\nNO DATA STORAGE FOUND!!!\n the [data] folder might be deleted/replaced"
+        main_text_box.insert(END, f"ERROR!⚠️\nNO DATA STORAGE FOUND!!!\n the [data] folder might be deleted/replaced"
                                   f"\n\nwe made you a new one! check it near the app"
                                   f"\nthe program will rebuild a new database as well :)")
         #+++++++++++++++++++++++++++DEBUG2
@@ -232,12 +233,13 @@ def recover_entry():
             json.dump(new_data, data_file, indent=4)
     # -----------
     except KeyError:
-        messagebox.showwarning(title="No file", message="No Entry with such name was found\n follow instructions provided in the text box! :)")
+        messagebox.showwarning(title="No file", message="No Entry with such name was found \n follow instructions provided in the text box! :)")
         ####
         main_text_box.delete("1.0", END)
-        main_text_box.insert(END, f"⚠️️ERROR!⚠️\nthe requested entry {requested_entry_name}\nwas NOT FOUND"
+        main_text_box.insert(END, f"️ERROR!⚠️\nthe requested entry {requested_entry_name}\nwas NOT FOUND"
                                   f"\n\nyou can write a new entry by the same name"
-                                  f"\n write here then click [SAVE]\n :)")
+                                  f"\n write here then click [SAVE]"
+                                  f"\n or just make sure to copy the name correctly, no extra spaces\n:)")
     # -----------
 
 #-------------SEARCH-BUTTON
@@ -279,7 +281,7 @@ def show_storage():
         Path("data").mkdir(exist_ok=True)
         ####
         main_text_box.delete("1.0", END)
-        main_text_box.insert(END, f"⚠️ERROR!⚠️\nNO DATA STORAGE FOUND!!!\n the [data] folder might be deleted/replaced"
+        main_text_box.insert(END, f"ERROR!⚠️\nNO DATA STORAGE FOUND!!!\n the [data] folder might be deleted/replaced"
                                   f"\n\nwe made you a new one! check it near the app"
                                   f"\nthe program will rebuild a new database as well :)")
         #+++++++++++++++++++++++++++DEBUG2
