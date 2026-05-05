@@ -172,13 +172,38 @@ file_unsave_state_img = PhotoImage(file="images/red_state.png")
 file_SS_red_light = lights_canvas.create_image(12, 12,
                                                image=file_unsave_state_img)  # <-----THIS ONE is the one manipulated
                                                                                                             # to be off or on
+def ss_light_check():
+    global file_save_state
+    #
+    if file_save_state:
+        lights_canvas.itemconfig(file_SS_red_light, state="hidden")
+        print("->>>>>>>>>>Removed")
+    else:
+        lights_canvas.itemconfig(file_SS_red_light, state="normal")
+        print("->>>>>>>>>>BACK IN PLACE")
+
+#_________________________________
 def file_save_check():
     print("SAVE CHECK APPLIED")
-
+    #
+    global file_save_state
+    file_save_state = True
+    #
+    ss_light_check()
 # x-xx-xx-xx-xx-xx-xx-xx-xx-xx-x #
 def file_save_uncheck():
     print("FILE IS NOT SAVED")
-# invoke this function when any key is pressed or typed to the main box!!!!
+    # invoke this function when any key is pressed or typed to the main box!!!!
+    #
+    global file_save_state
+    file_save_state = False
+    #
+    ss_light_check()
+#######
+any_key_pressed = Button(text="",command=file_save_uncheck)
+any_key_pressed.place(x=1000,y=1000)
+window.bind('<KeyRelease>', lambda event: any_key_pressed.invoke())
+#######
 
 
 #_____________________________DATA TEMPLATE
@@ -192,7 +217,6 @@ new_data = {
         "ENTRY" : "\n"f"Entry Data"
     }
 }
-
 
 
 #--------------------------------- SAVE SYSTEM
@@ -380,6 +404,8 @@ show_storage_button.place(x=widget_x,y=widget_y+widgets_displace*5+160)
 def clear_boxes():
     j_entry_bar.delete("0", END)
     main_text_box.delete("1.0", END)
+    #
+    file_save_uncheck()
 
 clear_button = Button(text="CLEAR♻️", font=FONT, bg="RED", fg="white", command=clear_boxes, width=10)
 clear_button.place(x=widget_x+262,y=widget_y+widgets_displace*2+50)
